@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 const img_host_token = import.meta.env.VITE_Image_Upload_Token;
 const AddItem = () => {
   const [axiosSecure]=useAxiosSecure()
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit ,reset} = useForm();
   const img_hosting_Url = `https://api.imgbb.com/1/upload?key=${img_host_token} `;
 
   
@@ -35,6 +35,7 @@ const AddItem = () => {
           axiosSecure.post("/menu", newItem).then((data) => {
             console.log("after posting new item", data.data);
             if(data.data.insertedId){
+                reset();
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
