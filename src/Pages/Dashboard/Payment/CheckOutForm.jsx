@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import './CheckOutForm.css'
 
 const CheckOutForm = ({ cart, price }) => {
     const stripe=useStripe();
@@ -13,11 +14,13 @@ const CheckOutForm = ({ cart, price }) => {
     const [processing,setProcessing]=useState(false);
     const [transactionId,setTransactionId]=useState('');
     useEffect(()=>{
+       if(price>0){
         axiosSecure.post('/create-payment-intent',{price})
         .then(res=>{
             // console.log(res.data.clientSecret)
             setClientSecret(res.data.clientSecret);
         })
+       }
     },[price,axiosSecure])
 
 
@@ -74,8 +77,11 @@ const CheckOutForm = ({ cart, price }) => {
                     email: user?.email,
                     transactionId: paymentIntent.id,
                     price,
-                    // quantity: cart?.length,
+                    date:new Date(),
+                    quantity: cart?.length,
                     cartItems: cart?.map(item => item?._id),
+                    menuItems: cart?.map(item => item?.menuItemId),
+                    status:'service pending',
                     itemNames: cart?.map(item => item?.name)
                 }
                 axiosSecure.post('/payments', payment)
@@ -113,7 +119,7 @@ const CheckOutForm = ({ cart, price }) => {
         {cardError && 
         <p className="text-red-600 ml-10" >{cardError.message}</p>
         }
-        {transactionId && <p className="text-green-500">Transaction complete with TransactionID: {transactionId}</p>}
+        {transactionId && <p className="text-green-500 ml-10 font-semibold">Transaction complete with TransactionID: {transactionId}</p>}
       </>
     );
 };
