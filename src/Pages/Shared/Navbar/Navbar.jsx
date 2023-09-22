@@ -29,9 +29,11 @@ const [cart]=useCart();
       <li>
         <Link to="/order/salad">Our Order</Link>
       </li>
-      <li>
+      {
+        user ?<li>
         <Link to={isAdmin? '/dashboard/adminhome':'/dashboard/userhome'}>Dashboard</Link>
-      </li>
+      </li>: ''
+      }
       <li>
         <Link to="/dashboard/mycart">
           <button className="btn">

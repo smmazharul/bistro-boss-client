@@ -10,26 +10,22 @@ const Dashboard = () => {
 
     //TODO: load data from the server to have dynamic isAdmin based on data
     const {data:users=[],refetch}=useQuery(['users'],async()=>{
-      const res =await fetch('http://localhost:5000/users')
+      const res =await fetch('https://bistro-boss-server-02nl.onrender.com/users')
       return res.json();
   })
     // const isAdmin=true;
     const [isAdmin]=useAdmin();
   return (
-    <div className="drawer lg:drawer-open">
+    <div className="drawer drawer-mobile ">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col items-center justify-start">
-        <Outlet></Outlet>
-        <label
-          htmlFor="my-drawer-2"
-          className="btn btn-primary drawer-button lg:hidden"
-        >
-          Open drawer
-        </label>
+      <div className="drawer-content">
+                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+                <Outlet></Outlet>
+
       </div>
       <div className="drawer-side bg-teal-500">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 min-h-full text-base-content">
+        <ul className="menu p-4 w-80">
           {
             isAdmin? <>
             <li>

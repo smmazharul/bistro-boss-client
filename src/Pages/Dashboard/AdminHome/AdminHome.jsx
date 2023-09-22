@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid,PieChart, Pie, ResponsiveContainer  } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid,PieChart, Pie, ResponsiveContainer, Legend  } from 'recharts';
 
 
 
@@ -172,6 +172,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
         <div className="w-1/2">
         <ResponsiveContainer width="100%" height="100%">
         <PieChart width={400} height={400}>
+            <Legend></Legend>
           <Pie
             data={chartData}
             cx="50%"
@@ -183,7 +184,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
             dataKey="count"
           >
             {chartData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              <Cell name={entry.category} key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
         </PieChart>

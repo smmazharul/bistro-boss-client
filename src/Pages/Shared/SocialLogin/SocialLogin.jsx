@@ -19,7 +19,7 @@ const SocialLogin = () => {
         email: loggedInUser.email,
       };
 
-      fetch("http://localhost:5000/users", {
+      fetch("https://bistro-boss-server-02nl.onrender.com/users", {
         method: "POST",
         headers: {
           "content-type": "application/json",
