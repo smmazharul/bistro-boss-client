@@ -10,7 +10,7 @@ const Dashboard = () => {
 
     //TODO: load data from the server to have dynamic isAdmin based on data
     const {data:users=[],refetch}=useQuery(['users'],async()=>{
-      const res =await fetch('https://bistro-boss-server-02nl.onrender.comusers')
+      const res =await fetch('https://bistro-boss-server-02nl.onrender.com/users')
       return res.json();
   })
     // const isAdmin=true;
