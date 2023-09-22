@@ -7,7 +7,7 @@ const useMenu =()=>{
     // const [menu,setMenu]=useState([]);
     // const [loading,setLoading]=useState(true);
     // useEffect(()=>{
-    //     fetch('https://bistro-boss-server-02nl.onrender.com/menu')
+    //     fetch('https://bistro-boss-server-02nl.onrender.com//menu')
     //     .then(res=>res.json())
     //     .then(data=>{
     //         setMenu(data)
@@ -18,7 +18,7 @@ const useMenu =()=>{
     const {refetch,data:menu=[],isLoading:loading}=useQuery({
         queryKey:['menu'],
         queryFn:async()=>{
-            const res=await fetch('https://bistro-boss-server-02nl.onrender.com/menu');
+            const res=await fetch('https://bistro-boss-server-02nl.onrender.com//menu');
             return res.json()
         }
     })
